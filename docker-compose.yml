@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend/:/backend
+    working_dir: /backend/
+    command: sh entrypoint.sh
+  nextapp:
+    build: ./nextapp
+    volumes:
+      - ./nextapp/:/nextapp
+    working_dir: /nextapp/
+    command: sh entry.sh
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:8080
+    volumes:
+      - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - backend
+      - nextapp
