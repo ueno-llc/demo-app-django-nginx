@@ -16,8 +16,9 @@ django app on `/api`.
 
 One new component is on the frontpage ([`nextapp/src/logged-in/LoggedIn.tsx`](nextapp/src/logged-in/LoggedIn.tsx)
 that checks if the user is logged in by doing a client side `fetch` to `/test` which proxies to the
-django app and checks if the user is logged in via ``. Since it's a client side request, all cookies
-are passed along and authentication is checked with no changes to django's system.
+django app and checks if the user is logged in via `request.user.is_authenticated`.
+Since it's a client side request, all cookies are passed along and authentication is checked with
+no changes to django's system. Login into django is `admin/admin`.
 
 Server-side implementation could also be achieved by passing along the cookie to the other app, we
 have access to them since we're on the same domain.
